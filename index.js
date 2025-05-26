@@ -6,6 +6,14 @@ import cors from "cors";
 import { Server as WebSocketServer } from "socket.io";
 
 const app = express();
+const server = http.createServer(app);
+const io = new WebSocketServer(server, {
+    cors: {
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST"]
+    }
+});
+const users = new Map();
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS.split(",");
 
